@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book</title>
+    <link rel="stylesheet" href="addBookStyle.css">
+</head>
+<body>
+
+    <h2>Add New Book</h2>
+    <form id="bookForm">
+        <input type="text" id="isbn" placeholder="ISBN Number" required>
+        <input type="text" id="bookName" placeholder="Book Name" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h3>QR Code</h3>
+    <img id="qrCode" alt="QR Code">
+    <br>
+    <a id="downloadBtn" download="book_qrcode.png">Download QR Code</a>
+
+    <script src="addBookScript.js"></script>
+
+</body>
+</html>
