@@ -7,7 +7,7 @@ const urlParams = new URLSearchParams(window.location.search);
    if (!bookId) {
        alert("Book ID is missing!");
        
-	   }
+   }
 	   
 	function fetchUserLoginDetails(){
 	

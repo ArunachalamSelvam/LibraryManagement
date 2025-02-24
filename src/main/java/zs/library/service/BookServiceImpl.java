@@ -77,6 +77,29 @@ public class BookServiceImpl implements BookService{
 	    }
 	    return book;
 	}
+	
+	@Override
+	public Book getBookByName(String bookName) throws SQLException, ClassNotFoundException {
+	    String query = "SELECT * FROM book WHERE book_name ILIKE ?"; // Case-insensitive search in PostgreSQL
+	    Book book = null;
+
+	    try (Connection con = DB_MANAGER.createConnection();
+	         PreparedStatement pstmt = con.prepareStatement(query)) {
+	        pstmt.setString(1, bookName);
+	        ResultSet rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            book = new Book();
+	            book.setBookId(rs.getInt("book_id"));
+	            book.setIsbnNo(rs.getString("isbn_no"));
+	            book.setBookName(rs.getString("book_name"));
+	            book.setAuthor(rs.getString("author"));
+	            book.setStatus(BookStatus.valueOf(rs.getString("status"))); // Assuming BookStatus is an Enum
+	        }
+	    }
+	    return book;
+	}
+
 
 
 	@Override

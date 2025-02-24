@@ -9,5 +9,6 @@ public interface BookService {
 	boolean updateBookStatus(int bookId) throws ClassNotFoundException, SQLException;
 	boolean getBookStatus(int bookId) throws SQLException, ClassNotFoundException ;
 	Book getBook(int bookId) throws SQLException, ClassNotFoundException;
+	Book getBookByName(String bookName) throws SQLException, ClassNotFoundException;
 		
 }

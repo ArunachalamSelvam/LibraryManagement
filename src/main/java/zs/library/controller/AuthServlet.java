@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import zs.library.model.User;
 import zs.library.service.UserServiceImpl;
 import zs.library.utils.JwtDecoder;
@@ -92,18 +93,22 @@ public class AuthServlet extends HttpServlet {
                         
                         String email = userJson.optString("email", null);
                         
+                        HttpSession session = request.getSession();
+                        
                         User existingUser = USER_SERVICE.getUserByEmail(email);
                         
                         if(existingUser==null) {
                         	User user = new User(email);
                         	User savedUser = USER_SERVICE.addUser(user);
                         	
-                            request.getSession().setAttribute("userId", savedUser.getUserId());
+                            session.setAttribute("userId", savedUser.getUserId());
                         	
                         }else {
-                            request.getSession().setAttribute("userId", existingUser.getUserId());
+                        	session.setAttribute("userId", existingUser.getUserId());
 
                         }
+                        
+                        session.setAttribute("email", email);
 //                        response.getWriter().write(decodedPayload);
                         
                         response.sendRedirect("http://localhost:8080/LibraryManagement/bookPage.html?bookId=" + bookId);
